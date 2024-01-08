@@ -11,6 +11,9 @@ RUN clj -Sdeps '{:mvn/local-repo "./.m2/repository"}' -T:build uber
 FROM eclipse-temurin:21-alpine AS runtime
 COPY --from=builder /opt/target/app-0.0.1-standalone.jar /app.jar
 
+RUN apk update && \
+    apk add --no-cache chromium chromium-chromedriver
+
 EXPOSE 8090
 
 ENTRYPOINT ["java", "-cp", "app.jar", "clojure.main", "-m", "acme.app"]
