@@ -5,7 +5,7 @@
 (def version "0.0.1")
 (def class-dir "target/classes")
 (def basis (b/create-basis {:project "deps.edn"}))
-(def uber-file (format "target/%s-%s-standalone.jar" (name lib) version))
+(def uber-file "app.jar")
 (def jar-file (format "target/%s-%s.jar" (name lib) version))
 
 (defn clean [_]

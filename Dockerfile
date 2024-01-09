@@ -1,24 +1,24 @@
-# based on https://gist.github.com/theronic/084a1c24fef7eb2a89a711239116e54b
+FROM selenium/standalone-chrome:latest
 
-FROM clojure:tools-deps-bookworm-slim AS builder
+# Switch to root user to install packages
+USER root
 
+# Install OpenJDK 21 & git
+RUN apt-get update && \
+    apt-get install -y openjdk-21-jre-headless git
+
+# Install Clojure
+RUN curl -L -O https://github.com/clojure/brew-install/releases/latest/download/linux-install.sh && \
+    chmod +x linux-install.sh && \
+    ./linux-install.sh
+
+
+# Copy directory into /opt
 WORKDIR /opt
-
 COPY . .
 
-RUN clj -Sdeps '{:mvn/local-repo "./.m2/repository"}' -T:build uber
-
-FROM --platform=linux/amd64 eclipse-temurin:21 AS runtime
-COPY --from=builder /opt/target/app-0.0.1-standalone.jar /app.jar
-
-RUN apt update -y && \
-    apt install -y unzip chromium-browser libnss3
-
-RUN wget https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/120.0.6099.109/linux64/chromedriver-linux64.zip -P /tmp/ && \
-    unzip /tmp/chromedriver-linux64.zip -d /usr/local/bin/ && \
-    rm /tmp/chromedriver-linux64.zip && \
-    chmod 755 /usr/local/bin/chromedriver-linux64 && \
-    ln -s /usr/local/bin/chromedriver-linux64/chromedriver /usr/local/bin/chromedriver
+# Build uberjar
+RUN clojure -Sdeps '{:mvn/local-repo "./.m2/repository"}' -T:build uber
 
 EXPOSE 8090
 
