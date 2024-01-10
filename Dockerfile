@@ -9,7 +9,7 @@ COPY . .
 RUN clj -Sdeps '{:mvn/local-repo "./.m2/repository"}' -T:build uber
 
 FROM eclipse-temurin:21-alpine AS runtime
-COPY --from=builder /opt/target/app-0.0.1-standalone.jar /app.jar
+COPY --from=builder /opt/target/app.jar /app.jar
 
 EXPOSE 8080
 
