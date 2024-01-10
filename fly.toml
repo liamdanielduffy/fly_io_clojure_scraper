@@ -9,10 +9,10 @@ kill_signal = "SIGINT"
 kill_timeout = "5s"
 
 [env]
-  PORT = "8090"
+  PORT = "8080"
 
 [http_service]
-  internal_port = 8090
+  internal_port = 8080
   force_https = true
   auto_stop_machines = true
   auto_start_machines = true
@@ -21,7 +21,7 @@ kill_timeout = "5s"
 
 [[services]]
   protocol = "tcp"
-  internal_port = 8090
+  internal_port = 8080
   processes = ["app"]
 
   [[services.ports]]
