@@ -1,5 +1,3 @@
-# based on https://gist.github.com/theronic/084a1c24fef7eb2a89a711239116e54b
-
 FROM clojure:tools-deps-bookworm-slim AS builder
 
 WORKDIR /opt
