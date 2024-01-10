@@ -4,7 +4,7 @@ WORKDIR /opt
 
 COPY . .
 
-RUN clj -Sdeps '{:mvn/local-repo "./.m2/repository"}' -T:build uber
+RUN clojure -Sdeps '{:mvn/local-repo "./.m2/repository"}' -T:build uber
 
 FROM eclipse-temurin:21-alpine AS runtime
 COPY --from=builder /opt/target/app.jar /app.jar
