@@ -1,6 +1,7 @@
 {:deps {org.clojure/clojure {:mvn/version "1.11.1"}
         http-kit/http-kit {:mvn/version "2.7.0"}
-        hiccup/hiccup {:mvn/version "2.0.0-RC2"}}
+        hiccup/hiccup {:mvn/version "2.0.0-RC2"}
+        etaoin/etaoin {:mvn/version "1.0.40"}}
 
  :aliases {:build
            {:deps {io.github.clojure/tools.build {:git/tag "v0.9.6" :git/sha "8e78bcc"}}
