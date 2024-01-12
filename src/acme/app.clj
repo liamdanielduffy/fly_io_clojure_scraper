@@ -7,7 +7,7 @@
 
 (def port (or (some-> (System/getenv "PORT")
                       parse-long)
-              8090))
+              8080))
 
 (defn -main [& _args]
   (server/run-server

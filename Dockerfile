@@ -20,6 +20,6 @@ COPY . .
 # Build uberjar
 RUN clojure -Sdeps '{:mvn/local-repo "./.m2/repository"}' -T:build uber
 
-EXPOSE 8090
+EXPOSE 8080
 
 ENTRYPOINT ["java", "-cp", "app.jar", "clojure.main", "-m", "acme.app"]
